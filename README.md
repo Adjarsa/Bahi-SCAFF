@@ -29,6 +29,19 @@ python3 -m http.server 8080
 
 Puis ouvrir `http://localhost:8080`.
 
+### Depannage rapide
+
+Si vous voyez `Directory listing for /`, le serveur a ete lance depuis le mauvais dossier.
+
+Corrigez avec:
+
+```bash
+cd /workspace
+python3 -m http.server 8080
+```
+
+Puis ouvrir `http://localhost:8080` (la racine redirige automatiquement vers la maquette).
+
 ## Fonctionnalites presentes
 
 - Import multi-fichiers (photos + plan).
