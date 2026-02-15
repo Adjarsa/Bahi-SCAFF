@@ -2,6 +2,33 @@
 
 Application SaaS pour la conception d'echafaudages de facade avec generation automatique, controle securite R408, quantitatif materiel et exports professionnels.
 
+## Demarrage local direct (Mac/Linux)
+
+Depuis la racine du projet:
+
+```bash
+./scripts/start-local.sh
+```
+
+Le script:
+- prepare backend + frontend automatiquement,
+- demarre les 2 services en local,
+- ouvre l'interface sur `http://127.0.0.1:5173` (Mac),
+- laisse les logs dans `.run/backend.log` et `.run/frontend.log`.
+
+Arret des services:
+
+```bash
+./scripts/stop-local.sh
+```
+
+Raccourcis Make:
+
+```bash
+make local-up
+make local-down
+```
+
 ## Architecture
 
 ```text
