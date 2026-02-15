@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+backend/.venv/
+backend/scaffoldplan.db
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Runtime storage
+backend/storage/
+
+# OS/editor
+.DS_Store
+*.swp
