@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScaffPlan Pro - Maquette fonctionnelle</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Maquette produit</p>
+          <h1>ScaffPlan Pro</h1>
+          <p class="subtitle">
+            Outil de preparation facade: calibration photo, implantation
+            echafaudage et quantitatif depot.
+          </p>
+        </div>
+        <button id="exportPng" class="secondary-btn">Exporter plan PNG</button>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <article class="step-card">
+            <p class="step-number">Etape 1</p>
+            <h3>Import facade et mise a l'echelle</h3>
+            <p>
+              Ajouter des photos ou un plan de facade, puis appliquer une
+              calibration avec une cote de reference.
+            </p>
+          </article>
+          <article class="step-card">
+            <p class="step-number">Etape 2</p>
+            <h3>Implantation avec trames et controles R408</h3>
+            <p>
+              Generation automatique de la trame echafaudage selon les
+              longueurs disponibles et les contraintes metier.
+            </p>
+          </article>
+          <article class="step-card">
+            <p class="step-number">Etape 3</p>
+            <h3>Quantitatif commande depot</h3>
+            <p>
+              Comparaison besoin vs stock et calcul des quantites a commander.
+            </p>
+          </article>
+        </aside>
+
+        <main class="main-content">
+          <section class="card" id="step1">
+            <h2>1) Donnees facade</h2>
+            <div class="form-grid">
+              <label>
+                Nom chantier
+                <input id="projectName" type="text" placeholder="Residence Helios" />
+              </label>
+              <label>
+                Adresse
+                <input id="projectAddress" type="text" placeholder="14 rue du Port, Marseille" />
+              </label>
+              <label>
+                Largeur facade (m)
+                <input id="facadeWidth" type="number" min="1" step="0.1" value="42" />
+              </label>
+              <label>
+                Hauteur facade (m)
+                <input id="facadeHeight" type="number" min="1" step="0.1" value="18" />
+              </label>
+              <label>
+                Hauteur niveau (m)
+                <input id="levelHeight" type="number" min="1.5" step="0.1" value="2" />
+              </label>
+              <label>
+                Fichiers facade (photos/plan)
+                <input id="facadeFiles" type="file" accept="image/*,.pdf" multiple />
+              </label>
+              <label>
+                Cote reference (m)
+                <input id="referenceMeters" type="number" min="0" step="0.01" value="2.10" />
+              </label>
+              <label>
+                Distance mesuree sur image (px)
+                <input id="referencePixels" type="number" min="0" step="1" value="126" />
+              </label>
+            </div>
+            <div class="inline-actions">
+              <button id="applyCalibration">Appliquer calibration</button>
+              <p id="calibrationResult">Calibration non appliquee.</p>
+            </div>
+            <div id="gallery" class="gallery"></div>
+          </section>
+
+          <section class="card" id="step2">
+            <h2>2) Implantation echafaudage</h2>
+            <div class="form-grid">
+              <label>
+                Trame preferee
+                <select id="tramePreset">
+                  <option value="mixte">Mixte (3 / 2 / 1.5 / 0.75)</option>
+                  <option value="standard">Standard (3 / 2 / 1.5)</option>
+                  <option value="urbaine">Urbaine (2 / 1.5 / 0.75)</option>
+                  <option value="serree">Serree (1.5 / 1 / 0.75)</option>
+                </select>
+              </label>
+              <label>
+                Type echafaudage
+                <select id="scaffoldType">
+                  <option value="facadier">Facade fixe</option>
+                  <option value="multidirectionnel">Multidirectionnel</option>
+                  <option value="renforce">Facade renforcee</option>
+                </select>
+              </label>
+              <label>
+                Strategie acces
+                <select id="accessStrategy">
+                  <option value="minimal">Minimal (1 tour)</option>
+                  <option value="standard" selected>Standard (1 acces / 20 m)</option>
+                  <option value="renforce">Renforce (1 acces / 12 m)</option>
+                </select>
+              </label>
+              <label class="check-row">
+                <input id="addToeBoards" type="checkbox" checked />
+                Ajouter plinthes de securite
+              </label>
+              <label class="check-row">
+                <input id="addNets" type="checkbox" checked />
+                Ajouter filets de protection
+              </label>
+              <label class="check-row">
+                <input id="nightShift" type="checkbox" />
+                Exploitation nuit (option signalisation)
+              </label>
+            </div>
+            <div class="inline-actions">
+              <button id="generatePlan">Generer implantation</button>
+              <span class="hint">
+                Controle R408 automatise a valider par un responsable habilite.
+              </span>
+            </div>
+            <ul id="r408Checks" class="checks"></ul>
+          </section>
+
+          <section class="card" id="step3">
+            <h2>3) Quantitatif et commande depot</h2>
+            <p class="hint">
+              Stock entreprise editable. Le tableau calcule le besoin, le stock
+              disponible et la commande manquante.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Stock actuel</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryBody"></tbody>
+            </table>
+            <div class="inline-actions">
+              <button id="computeQuantities">Calculer quantitatif</button>
+              <button id="downloadCsv" class="secondary-btn">Telecharger CSV</button>
+            </div>
+            <table id="resultTable">
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Besoin</th>
+                  <th>Stock</th>
+                  <th>A commander</th>
+                </tr>
+              </thead>
+              <tbody id="resultBody"></tbody>
+            </table>
+          </section>
+        </main>
+
+        <section class="preview-panel">
+          <div class="canvas-wrapper">
+            <canvas id="planCanvas" width="980" height="680"></canvas>
+          </div>
+          <div class="metrics">
+            <article>
+              <p>Surface facade</p>
+              <strong id="metricSurface">-</strong>
+            </article>
+            <article>
+              <p>Travees</p>
+              <strong id="metricBays">-</strong>
+            </article>
+            <article>
+              <p>Niveaux</p>
+              <strong id="metricLevels">-</strong>
+            </article>
+            <article>
+              <p>Couverture stock</p>
+              <strong id="metricCoverage">-</strong>
+            </article>
+          </div>
+          <div class="generated-list">
+            <h3>Liste materiel generee</h3>
+            <ul id="materialSummary"></ul>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        Maquette interactive - calculs indicatifs. Validation technique et
+        reglementaire obligatoire avant execution chantier.
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
