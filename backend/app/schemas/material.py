@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class MaterialBase(BaseModel):
@@ -22,6 +22,4 @@ class MaterialUpdate(BaseModel):
 
 class MaterialRead(MaterialBase):
     id: str
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

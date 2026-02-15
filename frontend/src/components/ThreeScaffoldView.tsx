@@ -1,5 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import { ReactNode } from "react";
 
 interface ThreeScaffoldViewProps {
   bayLayout: number[];
@@ -7,7 +8,7 @@ interface ThreeScaffoldViewProps {
 }
 
 function ScaffoldMesh({ bayLayout, levels }: ThreeScaffoldViewProps) {
-  const meshes: JSX.Element[] = [];
+  const meshes: ReactNode[] = [];
   let xOffset = 0;
   bayLayout.forEach((bayWidth, bayIdx) => {
     for (let level = 0; level < levels; level += 1) {
