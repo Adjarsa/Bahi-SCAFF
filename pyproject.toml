@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "facade2d"
+version = "0.1.0"
+description = "Professional 2D facade generator from smartphone photos."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Bahi-SCAFF" }
+]
+dependencies = [
+  "numpy>=1.26.4",
+  "opencv-python-headless>=4.10.0.84",
+  "fastapi>=0.115.12",
+  "uvicorn[standard]>=0.34.0",
+  "python-multipart>=0.0.20"
+]
+
+[project.scripts]
+facade2d = "facade2d.cli:main"
+facade2d-api = "facade2d.api:run"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
