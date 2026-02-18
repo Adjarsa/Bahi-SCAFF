@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bahi-scaff-backend"
+version = "0.1.0"
+description = "Plateforme interne de reconstruction facade et calcul echafaudage"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "pydantic",
+  "numpy",
+  "opencv-python",
+  "torch",
+  "open3d",
+  "shapely",
+  "svgwrite"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "httpx"
+]
+
+[tool.setuptools]
+packages = ["app"]
