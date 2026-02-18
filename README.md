@@ -44,6 +44,24 @@ La pipeline conserve :
 
 ## Installation rapide (recommandée)
 
+### Option 0 — Fichier direct unique (le plus simple)
+
+```bash
+bash facade2d_direct.sh --input ./photo_facade.jpg --output ./out
+```
+
+Ce fichier :
+- installe automatiquement l’outil si nécessaire,
+- puis lance le traitement.
+
+Autres modes :
+
+```bash
+bash facade2d_direct.sh install
+bash facade2d_direct.sh process --input ./photo_facade.jpg --output ./out
+bash facade2d_direct.sh api
+```
+
 ### Option A — Script automatique
 
 ```bash
