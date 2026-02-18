@@ -21,6 +21,7 @@ else
   echo "[facade2d] Avertissement: impossible de créer un venv, fallback en installation utilisateur."
   echo "[facade2d] Détail venv:"
   cat /tmp/facade2d_venv.log || true
+  rm -rf "${VENV_DIR}"
   python3 -m pip install --user --upgrade pip
   python3 -m pip install --user -e "${ROOT_DIR}"
 fi
