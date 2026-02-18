@@ -42,10 +42,42 @@ La pipeline conserve :
 
 ---
 
-## Installation
+## Installation rapide (recommandée)
+
+### Option A — Script automatique
 
 ```bash
+bash scripts/install_facade2d.sh
+```
+
+Puis lancer un traitement :
+
+```bash
+bash scripts/facade2d_process.sh --input ./photo_facade.jpg --output ./out
+```
+
+Ou lancer l’API :
+
+```bash
+bash scripts/facade2d_api.sh
+```
+
+### Option B — Manuelle
+
+```bash
+python3 -m venv .venv-facade2d
+source .venv-facade2d/bin/activate
 pip install -e .
+```
+
+---
+
+## Utilisation via Makefile
+
+```bash
+make install
+make process ARGS="--input ./photo_facade.jpg --output ./out"
+make api
 ```
 
 ---
@@ -140,6 +172,11 @@ src/facade2d/
   parsing.py
   pipeline.py
   rendering.py
+scripts/
+  install_facade2d.sh
+  facade2d_process.sh
+  facade2d_api.sh
+Makefile
 tests/
   test_pipeline_synthetic.py
 ```
