@@ -50,6 +50,10 @@ La pipeline conserve :
 bash scripts/install_facade2d.sh
 ```
 
+Le script gère 2 cas automatiquement :
+- installation dans `.venv-facade2d` (si `python3 -m venv` est disponible),
+- sinon fallback en mode `--user` (machines cloud/minimales).
+
 Puis lancer un traitement :
 
 ```bash
