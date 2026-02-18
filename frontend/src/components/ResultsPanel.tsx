@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type { PipelineResponse } from "../types";
 
 interface ResultsPanelProps {
@@ -6,7 +7,7 @@ interface ResultsPanelProps {
   onExport: (format: "svg" | "dxf" | "pdf" | "obj" | "glb" | "ifc") => void;
 }
 
-export function ResultsPanel({ response, error, onExport }: ResultsPanelProps): JSX.Element {
+export function ResultsPanel({ response, error, onExport }: ResultsPanelProps): ReactElement {
   return (
     <section className="panel">
       <h2>Resultats techniques</h2>

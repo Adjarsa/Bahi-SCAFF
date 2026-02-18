@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactElement } from "react";
 import { FacadeCanvas } from "./components/FacadeCanvas";
 import { MeasurementPanel } from "./components/MeasurementPanel";
 import { ResultsPanel } from "./components/ResultsPanel";
@@ -27,7 +27,7 @@ function downloadTextFile(filename: string, content: string): void {
   URL.revokeObjectURL(url);
 }
 
-export default function App(): JSX.Element {
+export default function App(): ReactElement {
   const [request, setRequest] = useState<PipelineRequest>(initialRequest);
   const [response, setResponse] = useState<PipelineResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);

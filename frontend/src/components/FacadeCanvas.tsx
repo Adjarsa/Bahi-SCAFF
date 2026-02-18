@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactElement } from "react";
 import type { PipelineRequest, PipelineResponse } from "../types";
 
 interface FacadeCanvasProps {
@@ -6,7 +6,7 @@ interface FacadeCanvasProps {
   response: PipelineResponse | null;
 }
 
-export function FacadeCanvas({ request, response }: FacadeCanvasProps): JSX.Element {
+export function FacadeCanvas({ request, response }: FacadeCanvasProps): ReactElement {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {

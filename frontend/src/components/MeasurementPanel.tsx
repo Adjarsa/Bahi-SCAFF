@@ -1,4 +1,4 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, ReactElement } from "react";
 import type { PipelineRequest } from "../types";
 
 interface MeasurementPanelProps {
@@ -13,7 +13,7 @@ export function MeasurementPanel({
   onChange,
   onRun,
   loading
-}: MeasurementPanelProps): JSX.Element {
+}: MeasurementPanelProps): ReactElement {
   function updateNumericField(
     key: keyof PipelineRequest,
     event: ChangeEvent<HTMLInputElement>
