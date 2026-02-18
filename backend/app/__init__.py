@@ -1,0 +1,1 @@
+"""Backend applicatif Bahi-SCAFF."""
